@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invoice System</title>
+</head>
+<body>
+    <h1>Invoice System</h1>
+    <form method="POST" action="/run" enctype="multipart/form-data">
+        <label>Select Script:</label>
+        <select name="script">
+            {% for script in scripts %}
+                <option value="{{ script }}">{{ script }}</option>
+            {% endfor %}
+        </select><br><br>
+        <label>Upload Files (if needed):</label>
+        <input type="file" name="files" multiple><br><br>
+        <button type="submit">Run Script</button>
+    </form>
+    {% if output %}
+        <h2>Output:</h2>
+        <pre>{{ output }}</pre>
+    {% endif %}
+    {% if zip_path %}
+        <h2>Download Results:</h2>
+        <a href="/download/{{ temp_dir }}/{{ zip_path }}">Download Output ZIP</a>
+    {% endif %}
+    <br><br>
+    <a href="/logout">Logout</a>
+</body>
+</html>
